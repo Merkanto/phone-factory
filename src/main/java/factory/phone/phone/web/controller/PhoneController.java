@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@Deprecated
 @RequestMapping("/api/v1/phone")
 @RestController
 public class PhoneController {
@@ -25,17 +26,17 @@ public class PhoneController {
     }
 
     @PostMapping // create new phone
-    public ResponseEntity handlePost(PhoneDto phoneDto) {
+    public ResponseEntity handlePost(@RequestBody PhoneDto phoneDto) {
         PhoneDto savedDto = phoneService.saveNewPhone(phoneDto);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/v1/phone" + savedDto.getId().toString());
+        headers.add("Location", "/api/v1/phone/" + savedDto.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
     @PutMapping({"/{phoneId}"}) // update phone
-    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, PhoneDto phoneDto) {
+    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, @RequestBody PhoneDto phoneDto) {
         phoneService.updatePhone(phoneId, phoneDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
