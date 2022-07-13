@@ -1,10 +1,12 @@
 package factory.phone.phone.web.service;
 
 import factory.phone.phone.web.model.PhoneDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class PhoneServiceImpl implements PhoneService {
     @Override
@@ -26,5 +28,10 @@ public class PhoneServiceImpl implements PhoneService {
     @Override
     public void updatePhone(UUID phoneId, PhoneDto phoneDto) {
 
+    }
+
+    @Override
+    public void deleteById(UUID phoneId) {
+        log.debug("Deleting a phone...");
     }
 }

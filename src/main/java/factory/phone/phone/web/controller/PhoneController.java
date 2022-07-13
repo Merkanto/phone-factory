@@ -40,4 +40,10 @@ public class PhoneController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping({"/{phoneId}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePhone(@PathVariable("phoneId") UUID phoneId) {
+        phoneService.deleteById(phoneId);
+    }
 }

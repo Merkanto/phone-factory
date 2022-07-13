@@ -10,4 +10,6 @@ public interface PhoneService {
     PhoneDto saveNewPhone(PhoneDto phoneDto);
 
     void updatePhone(UUID phoneId, PhoneDto phoneDto);
+
+    void deleteById(UUID phoneId);
 }
