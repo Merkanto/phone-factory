@@ -1,4 +1,4 @@
-package factory.phone.phone.web.service.v2;
+package factory.phone.phone.service.v2;
 
 import factory.phone.phone.web.model.v2.PhoneDtoV2;
 import org.springframework.stereotype.Service;

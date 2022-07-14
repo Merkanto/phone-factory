@@ -1,4 +1,4 @@
-package factory.phone.phone.web.service;
+package factory.phone.phone.service;
 
 import factory.phone.phone.web.model.CustomerDto;
 import factory.phone.phone.web.model.PhoneDto;

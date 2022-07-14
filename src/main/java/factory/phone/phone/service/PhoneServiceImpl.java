@@ -1,4 +1,4 @@
-package factory.phone.phone.web.service;
+package factory.phone.phone.service;
 
 import factory.phone.phone.web.model.PhoneDto;
 import lombok.extern.slf4j.Slf4j;

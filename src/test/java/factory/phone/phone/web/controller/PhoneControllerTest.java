@@ -2,7 +2,7 @@ package factory.phone.phone.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import factory.phone.phone.web.model.PhoneDto;
-import factory.phone.phone.web.service.PhoneService;
+import factory.phone.phone.service.PhoneService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

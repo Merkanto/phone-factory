@@ -1,7 +1,7 @@
 package factory.phone.phone.web.controller.v2;
 
 import factory.phone.phone.web.model.v2.PhoneDtoV2;
-import factory.phone.phone.web.service.v2.PhoneServiceV2;
+import factory.phone.phone.service.v2.PhoneServiceV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

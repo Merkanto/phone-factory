@@ -1,7 +1,7 @@
 package factory.phone.phone.web.controller;
 
 import factory.phone.phone.web.model.PhoneDto;
-import factory.phone.phone.web.service.PhoneService;
+import factory.phone.phone.service.PhoneService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
