@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
-@Deprecated
+//@Deprecated
 @RequestMapping("/api/v1/phone")
 @RestController
 public class PhoneController {
@@ -26,7 +27,7 @@ public class PhoneController {
     }
 
     @PostMapping // create new phone
-    public ResponseEntity handlePost(@RequestBody PhoneDto phoneDto) {
+    public ResponseEntity handlePost(@Valid @RequestBody PhoneDto phoneDto) {
         PhoneDto savedDto = phoneService.saveNewPhone(phoneDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,7 +37,7 @@ public class PhoneController {
     }
 
     @PutMapping({"/{phoneId}"}) // update phone
-    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, @RequestBody PhoneDto phoneDto) {
+    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, @Valid @RequestBody PhoneDto phoneDto) {
         phoneService.updatePhone(phoneId, phoneDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
