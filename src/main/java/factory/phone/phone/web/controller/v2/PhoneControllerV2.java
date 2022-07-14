@@ -5,10 +5,17 @@ import factory.phone.phone.web.service.v2.PhoneServiceV2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+@Validated
 @RequestMapping("/api/v2/phone")
 @RestController
 public class PhoneControllerV2 {
@@ -20,12 +27,12 @@ public class PhoneControllerV2 {
     }
 
     @GetMapping({"/{phoneId}"})
-    public ResponseEntity<PhoneDtoV2> getPhone(@PathVariable("phoneId") UUID phoneId) {
+    public ResponseEntity<PhoneDtoV2> getPhone(@NotNull @PathVariable("phoneId") UUID phoneId) {
         return new ResponseEntity<>(phoneServiceV2.getPhoneById(phoneId), HttpStatus.OK);
     }
 
     @PostMapping // create new phone
-    public ResponseEntity handlePost(@RequestBody PhoneDtoV2 phoneDto) {
+    public ResponseEntity handlePost(@Valid @NotNull @RequestBody PhoneDtoV2 phoneDto) {
         PhoneDtoV2 savedDto = phoneServiceV2.saveNewPhone(phoneDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -35,7 +42,7 @@ public class PhoneControllerV2 {
     }
 
     @PutMapping({"/{phoneId}"}) // update phone
-    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, @RequestBody PhoneDtoV2 phoneDto) {
+    public ResponseEntity handleUpdate(@PathVariable("phoneId") UUID phoneId, @Valid @RequestBody PhoneDtoV2 phoneDto) {
         phoneServiceV2.updatePhone(phoneId, phoneDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -45,5 +52,14 @@ public class PhoneControllerV2 {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePhone(@PathVariable("phoneId") UUID phoneId) {
         phoneServiceV2.deleteById(phoneId);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e) {
+        List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
+        e.getConstraintViolations().forEach(constraintViolation -> {
+            errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
